@@ -73,7 +73,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
         $this->format = $format;
         $this->debug = $debug;
         $this->JSON = json_decode(
-            file_get_contents(__DIR__ . '/codes.json'),
+            file_get_contents(__DIR__ . '/Exceptions/codes.json'),
             true
         );
     }

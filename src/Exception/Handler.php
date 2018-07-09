@@ -103,7 +103,12 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     public function render($request, Exception $exception)
     {
         $exception->url = $request->url();
-        $data['error'] = $this->handle($exception);
+
+        if ($this->checkExceptionType($exception)) {
+            $data['error'] = $this->handle($exception);
+        } else {
+            return $this->handle($exception);
+        }
 
         return $data;
     }
@@ -144,8 +149,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
      */
     public function handle(Exception $exception)
     {
-        $class = 'Dingo\Api\Exception\Exceptions\AmhHttpException';
-        if ($exception instanceof $class) {
+        if ($this->checkExceptionType($exception)) {
             $errors = $exception->flattenException();
 
             foreach ($errors as $err) {
@@ -193,6 +197,18 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
             ? $this->JSON['codes'][$statusCode][$errorCode]
             // placeholder msg for wrong errorcode
             : ['message' => 'Non existent error_code provided in exception.'];
+    }
+
+    /**
+     * Check if exception is of type AmhHttpException
+     * @param  Exception $exception Exception to check
+     * @return bool               true/false
+     */
+    public function checkExceptionType(Exception $exception)
+    {
+        $class = 'Dingo\Api\Exception\Exceptions\AmhHttpException';
+
+        return ($exception instanceof $class);
     }
 
     /**

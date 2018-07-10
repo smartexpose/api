@@ -17,9 +17,18 @@ This package provides tools for the following, and more:
 - API Versioning
 - Rate Limiting
 - Response Transformers and Formatters
-- Error and Exception Handling
+- Error and Exception Handling (AMH Usecase)
 - Internal Requests
 - API Blueprint Documentation
+
+
+## Use at Amh
+
+Extension of Dingos Exception Handler to make it usable with Amh specific Domains and it's Errorcodes.
+
+Find the new `Allmyhomes` namespace under `Dingo\Api\Exceptions`.
+
+Custom Exception Types (extending from `AmhHttpException`) get handled differently, allowing for nested Exceptions and the retrieval of messages and domain by providing errorcodes when throwing.
 
 ## Documentation
 

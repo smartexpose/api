@@ -1,8 +1,8 @@
 <?php
 
-namespace Dingo\Api\Exception\Exceptions\BaseHttpExceptions;
+namespace Dingo\Api\Exception\Allmyhomes\BaseHttpExceptions;
 
-use Dingo\Api\Exception\Exceptions\AmhHttpException;
+use Dingo\Api\Exception\Allmyhomes\AmhHttpException;
 
 /**
  * @class BadRequestHttpException
@@ -17,7 +17,7 @@ class BadRequestHttpException extends BaseHttpException
      * @param int                    $errorCode
      * @param BaseHttpException|null $previous
      */
-    public function __construct(int $errorCode, ?BaseHttpException $previous = null)
+    public function __construct(int $errorCode, ?AmhHttpException $previous = null)
     {
         parent::__construct(400, $errorCode, $previous);
     }

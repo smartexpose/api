@@ -1,6 +1,6 @@
 <?php
 
-namespace Dingo\Api\Exception\Exceptions;
+namespace Dingo\Api\Exception\Allmyhomes;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response as BaseResponse;

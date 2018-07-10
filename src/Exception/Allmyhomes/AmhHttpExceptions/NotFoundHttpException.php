@@ -1,8 +1,8 @@
 <?php
 
-namespace Dingo\Api\Exception\Exceptions\AmhHttpExceptions;
+namespace Dingo\Api\Exception\Allmyhomes\AmhHttpExceptions;
 
-use Dingo\Api\Exception\Exceptions\AmhHttpException;
+use Dingo\Api\Exception\Allmyhomes\AmhHttpException;
 
 /**
  * @class NotFoundHttpException

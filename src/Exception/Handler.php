@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 use Dingo\Api\Contract\Debug\ExceptionHandler;
 use Dingo\Api\Contract\Debug\MessageBagErrors;
 
-use Dingo\Api\Exception\Exceptions\AmhHttpException;
+use Dingo\Api\Exception\Allmyhomes\AmhHttpException;
 
 use Symfony\Component\HttpFoundation\Response as BaseResponse;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
@@ -73,7 +73,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
         $this->format = $format;
         $this->debug = $debug;
         $this->JSON = json_decode(
-            file_get_contents(__DIR__ . '/Exceptions/codes.json'),
+            file_get_contents(__DIR__ . '/Allmyhomes/codes.json'),
             true
         );
     }
@@ -104,7 +104,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     {
         $exception->url = $request->url();
 
-        if ($this->checkExceptionType($exception)) {
+        if ($this->isCustomException($exception)) {
             $data['error'] = $this->handle($exception);
         } else {
             return $this->handle($exception);
@@ -149,7 +149,7 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
      */
     public function handle(Exception $exception)
     {
-        if ($this->checkExceptionType($exception)) {
+        if ($this->isCustomException($exception)) {
             $errors = $exception->flattenException();
 
             foreach ($errors as $err) {
@@ -201,12 +201,13 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
 
     /**
      * Check if exception is of type AmhHttpException
+     *
      * @param  Exception $exception Exception to check
      * @return bool               true/false
      */
-    public function checkExceptionType(Exception $exception)
+    public function isCustomException(Exception $exception)
     {
-        $class = 'Dingo\Api\Exception\Exceptions\AmhHttpException';
+        $class = 'Dingo\Api\Exception\Allmyhomes\AmhHttpException';
 
         return ($exception instanceof $class);
     }

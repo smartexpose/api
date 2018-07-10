@@ -23,6 +23,13 @@ class Mock extends Command
     protected $writer;
 
     /**
+     * Controller name.
+     *
+     * @var string
+     */
+    protected $controller;
+
+    /**
      * The name and signature of the console command.
      *
      * @var string
@@ -34,44 +41,42 @@ class Mock extends Command
      *
      * @var string
      */
-    protected $description = 'Mock data from Blueprint @Response annotations in Controllers';
+    protected $description = 'Mock Response data from Blueprint annotations';
 
     /**
      * Create a new mock command instance.
      *
-     * @param \Dingo\Blueprint\Blueprint $blueprint
-     * @param \Dingo\Blueprint\Writer    $writer
-     * @param string                     $name
-     * @param string                     $version
+     * @param \Dingo\Blueprint\DataMocker   $mocker
+     * @param \Dingo\Blueprint\Writer       $writer
+     * @param string                        $controller
      *
      * @return void
      */
-    public function __construct(DataMocker $mocker, Writer $writer, $name, $version)
+    public function __construct(DataMocker $mocker, Writer $writer, $controller)
     {
         parent::__construct();
 
         $this->mocker = $mocker;
         $this->writer = $writer;
-        $this->name = $name;
-        $this->version = $version;
+        $this->controller = $controller;
     }
 
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {
-        $controllerName = $this->argument(controller);
+        $controllerName = $this->argument('controller');
         $contents = $this->mocker->generate($controllerName);
         $file = $this->getOutputFileName($controllerName);
         $this->writer->write($contents, $file);
-        return $this->info('Mock data was generated successfully.');
+        $this->info('Mock data was generated successfully.');
     }
 
     /**
-     * Get the include path for documentation files.
+     * Get the output path for documentation files.
      *
      * @param string $controllerName Name of Controller
      * @return string

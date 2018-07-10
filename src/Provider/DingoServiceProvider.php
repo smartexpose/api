@@ -62,6 +62,8 @@ class DingoServiceProvider extends ServiceProvider
 
         $this->registerDocsCommand();
 
+        $this->registerMockCommand();
+
         if (class_exists('Illuminate\Foundation\Application', false)) {
             $this->commands([
                 \Dingo\Api\Console\Command\Cache::class,
@@ -187,5 +189,25 @@ class DingoServiceProvider extends ServiceProvider
         });
 
         $this->commands([\Dingo\Api\Console\Command\Docs::class]);
+    }
+
+    /**
+     * Register the mock command.
+     *
+     * @return void
+     */
+    protected function registerMockCommand()
+    {
+        $this->app->singleton(\Dingo\Api\Console\Command\Mock::class, function ($app) {
+            return new Command\Mock(
+                $app[\Dingo\Api\Routing\Router::class],
+                $app[\Dingo\Blueprint\Blueprint::class],
+                $app[\Dingo\Blueprint\Writer::class],
+                $this->config('name'),
+                $this->config('version')
+            );
+        });
+
+        $this->commands([\Dingo\Api\Console\Command\Mock::class]);
     }
 }

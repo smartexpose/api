@@ -1,0 +1,515 @@
+{
+	"codes" : {
+		"400": {
+			"code": "400",
+			"key": "Bad Request",
+			"message": "The request cannot be fulfilled due to bad syntax",
+			"1" : {
+				"code" : "1",
+				"domain": "Account",
+				"message": "The logout failed."
+			},
+			"2" : {
+				"code" : "2",
+				"domain": "Account",
+				"message": "User requested deletion."
+			},
+			"3" : {
+				"code" : "3",
+				"domain": "Account",
+				"message": "User not active."
+			},
+			"4" : {
+				"code" : "4",
+				"domain": "Validation",
+				"message": "New password must be at least 8 characters in length, contain at least one uppercase letter, one lowercase letter, one digit, and one special character."
+			},
+			"5" : {
+				"code" : "5",
+				"domain": "Validation",
+				"message": "New password must be at least 8 characters in length."
+			},
+			"6" : {
+				"code" : "6",
+				"domain": "User",
+				"message": "Old password is incorrect."
+			},
+			"7" : {
+				"code" : "7",
+				"domain": "User",
+				"message": "Unknown user error in normalizeUserPasswordValidationErrors."
+			},
+			"8" : {
+				"code" : "8",
+				"domain": "Validation",
+				"message": "Password contains first name."
+			},
+			"9" : {
+				"code" : "9",
+				"domain": "Validation",
+				"message": "Password contains last name."
+			},
+			"10" : {
+				"code" : "10",
+				"domain": "Validation",
+				"message": "Equal to previous password."
+			},
+			"11" : {
+				"code" : "11",
+				"domain": "Notification",
+				"message": "Failed to send email."
+			},
+			"12" : {
+				"code" : "12",
+				"domain": "User",
+				"message": "The user is already active."
+			},
+			"13" : {
+				"code" : "13",
+				"domain": "Account",
+				"message": "Updating credentials failed."
+			},
+			"14" : {
+				"code" : "14",
+				"domain": "Task",
+				"message": "No task can be created."
+			},
+			"15" : {
+				"code" : "15",
+				"domain": "Favourite",
+				"message": "Customer is already favorized."
+			},
+			"16" : {
+				"code" : "16",
+				"domain": "Task",
+				"message": "There is an active task already."
+			},
+			"17" : {
+				"code" : "17",
+				"domain": "Task",
+				"message": "Cannot activate this task, because it is scheduled for a future time."
+			}
+		},
+		"401": {
+			"code": "401",
+			"key": "Unauthorized",
+			"message": "The request was a legal request, but the server is refusing to respond to it. For use when authentication is possible but has failed or not yet been provided",
+			"1" : {
+				"code" : "1",
+				"domain": "Authentication",
+				"message": "Authentication failed."
+			},
+			"2" : {
+				"code" : "2",
+				"domain": "Authentication",
+				"message": "Authentication failed to create new session."
+			},
+			"3" : {
+				"code" : "3",
+				"domain": "User",
+				"message": "Wrong password."
+			},
+			"4" : {
+				"code" : "4",
+				"domain": "User",
+				"message": "User not active."
+			},
+			"5" : {
+				"code" : "5",
+				"domain": "Authorization",
+				"message": "Customers are not allowed to login in Agent Section."
+			}
+		},
+		"403": {
+			"code": "403",
+			"domain": "Forbidden",
+			"message": "The request was a legal request, but the server is refusing to respond to it",
+			"1" : {
+				"code" : "1",
+				"domain": "Verification",
+				"message": "Customer cannot verify forgot password."
+			},
+			"2" : {
+				"code" : "2",
+				"domain": "Authorization",
+				"message": "User must be agent or admin."
+			},
+			"3" : {
+				"code" : "3",
+				"domain": "Authorization",
+				"message": "Only accessible for agents."
+			},
+			"4" : {
+				"code" : "4",
+				"domain": "Authorization",
+				"message": "Agent cannot create a list of employees."
+			},
+			"5" : {
+				"code" : "5",
+				"domain": "Authorization",
+				"message": "Agent is not allowed to delete project in share."
+			},
+			"5" : {
+				"code" : "5",
+				"domain": "Authorization",
+				"message": "Logged in agent cannot access this project."
+			},
+			"6" : {
+				"code" : "6",
+				"domain": "Authorization",
+				"message": "User cannot create share."
+			},
+			"7" : {
+				"code" : "7",
+				"domain": "Account",
+				"message": "Admins cannot be associated with companies."
+			},
+			"8" : {
+				"code" : "8",
+				"domain": "Authorization",
+				"message": "User does not have rights to change other user."
+			},
+			"9" : {
+				"code" : "9",
+				"domain": "Authorization",
+				"message": "Only admins can edit inactive users."
+			},
+			"10" : {
+				"code" : "10",
+				"domain": "Authorization",
+				"message": "Agents cannot change themselves to admin"
+			},
+			"11" : {
+				"code" : "11",
+				"domain": "Authorization",
+				"message": "User is not allowed to delete."
+			},
+			"12" : {
+				"code" : "12",
+				"domain": "Authorization",
+				"message": "Only Admins can set avatars."
+			},
+			"15" : {
+				"code" : "15",
+				"domain": "Task",
+				"message": "User does not own task."
+			},
+			"16" : {
+				"code" : "16",
+				"domain": "Task",
+				"message": "Task is already closed."
+			},
+			"17" : {
+				"code" : "17",
+				"domain": "Task",
+				"message": "There is an on hold task already."
+			},
+			"18" : {
+				"code" : "18",
+				"domain": "OAuth",
+				"message": "User device is invalid."
+			},
+			"19" : {
+				"code" : "19",
+				"domain": "OAuth",
+				"message": "User token is invalid."
+			},
+			"20" : {
+				"code" : "20",
+				"domain": "OAuth",
+				"message": "Provider or token parameter is missing."
+			}
+		},
+		"404": {
+			"code": "404",
+			"key": "Not Found",
+			"message": "The requested resource could not be found but may be available again in the future",
+			"1" : {
+				"code" : "1",
+				"domain": "User",
+				"message": "The user is not found."
+			},
+			"2" : {
+				"code" : "2",
+				"domain": "Customer",
+				"message": "The customer is not found."
+			},
+			"3" : {
+				"code" : "3",
+				"domain": "Manager",
+				"message": "The manager is not found."
+			},
+			"4" : {
+				"code" : "4",
+				"domain": "Project",
+				"message": "The project is not found."
+			},
+			"5" : {
+				"code" : "5",
+				"domain": "Task",
+				"message": "The task is not found."
+			},
+			"6" : {
+				"code" : "6",
+				"domain": "Lead",
+				"message": "The lead is not found."
+			},
+			"7" : {
+				"code" : "7",
+				"domain": "Favourite",
+				"message": "The favourite is not found."
+			},
+			"8" : {
+				"code" : "8",
+				"domain": "Document",
+				"message": "The document is not found."
+			},
+			"9" : {
+				"code" : "9",
+				"domain": "File",
+				"message": "The file is not found."
+			},
+			"10" : {
+				"code" : "10",
+				"domain": "Magazine",
+				"message": "The magazine is not found."
+			},
+			"11" : {
+				"code" : "11",
+				"domain": "Offer",
+				"message": "The offer is not found."
+			},
+			"12" : {
+				"code" : "12",
+				"domain": "Share",
+				"message": "The share is not found."
+			},
+			"13" : {
+				"code" : "13",
+				"domain": "Account",
+				"message": "The account is not found."
+			},
+			"14" : {
+				"code" : "14",
+				"domain": "ProjectFunnel",
+				"message": "The projectFunnel is not found."
+			}
+		},
+		"1xx": {
+			"key": "Information",
+			"message": ""
+		},
+		"100": {
+			"key": "Continue",
+			"message": "The server has received the request headers, and the client should proceed to send the request body"
+		},
+		"101": {
+			"key": "Switching Protocols",
+			"message": "The requester has asked the server to switch protocols"
+		},
+		"103": {
+			"key": "Checkpoint",
+			"message": "Used in the resumable requests proposal to resume aborted PUT or POST requests"
+		},
+		"2xx": {
+			"key": "Successful",
+			"message": ""
+		},
+		"200": {
+			"key": "OK",
+			"message": "The request is OK (this is the standard response for successful HTTP requests)"
+		},
+		"201": {
+			"key": "Created",
+			"message": "The request has been fulfilled, and a new resource is created"
+		},
+		"202": {
+			"key": "Accepted",
+			"message": "The request has been accepted for processing, but the processing has not been completed"
+		},
+		"203": {
+			"key": "Non-Authoritative Information",
+			"message": "The request has been successfully processed, but is returning information that may be from another source"
+		},
+		"204": {
+			"key": "No Content",
+			"message": "The request has been successfully processed, but is not returning any content"
+		},
+		"205": {
+			"key": "Reset Content",
+			"message": "The request has been successfully processed, but is not returning any content, and requires that the requester reset the document view"
+		},
+		"206": {
+			"key": "Partial Content",
+			"message": "The server is delivering only part of the resource due to a range header sent by the client"
+		},
+		"3xx": {
+			"key": "Redirection",
+			"message": ""
+		},
+		"300": {
+			"key": "Multiple Choices",
+			"message": "A link list. The user can select a link and go to that location. Maximum five addresses"
+		},
+		"301": {
+			"key": "Moved Permanently",
+			"message": "The requested page has moved to a new URL"
+		},
+		"302": {
+			"key": "Found",
+			"message": "The requested page has moved temporarily to a new URL"
+		},
+		"303": {
+			"key": "See Other",
+			"message": "The requested page can be found under a different URL"
+		},
+		"304": {
+			"key": "Not Modified",
+			"message": "Indicates the requested page has not been modified since last requested"
+		},
+		"306": {
+			"key": "Switch Proxy",
+			"message": "-- No longer used --"
+		},
+		"307": {
+			"key": "Temporary Redirect",
+			"message": "The requested page has moved temporarily to a new URL"
+		},
+		"308": {
+			"key": "Resume Incomplete",
+			"message": "Used in the resumable requests proposal to resume aborted PUT or POST requests"
+		},
+		"4xx": {
+			"key": "Client Error",
+			"message": ""
+		},
+		"402": {
+			"key": "Payment Required",
+			"message": "-- Reserved for future use --"
+		},
+		"405": {
+			"key": "Method Not Allowed",
+			"message": "A request was made of a page using a request method not supported by that page"
+		},
+		"406": {
+			"key": "Not Acceptable",
+			"message": "The server can only generate a response that is not accepted by the client"
+		},
+		"407": {
+			"key": "Proxy Authentication Required",
+			"message": "The client must first authenticate itself with the proxy"
+		},
+		"408": {
+			"key": "Request Timeout",
+			"message": "The server timed out waiting for the request"
+		},
+		"409": {
+			"key": "Conflict",
+			"message": "The request could not be completed because of a conflict in the request"
+		},
+		"410": {
+			"key": "Gone",
+			"message": "The requested page is no longer available"
+		},
+		"411": {
+			"key": "Length Required",
+			"message": "The \"Content-Length\" is not defined. The server will not accept the request without it"
+		},
+		"412": {
+			"key": "Precondition Failed",
+			"message": "The precondition given in the request evaluated to false by the server"
+		},
+		"413": {
+			"key": "Request Entity Too Large",
+			"message": "The server will not accept the request, because the request entity is too large"
+		},
+		"414": {
+			"key": "Request-URI Too Long",
+			"message": "The server will not accept the request, because the URL is too long. Occurs when you convert a POST request to a GET request with a long query information"
+		},
+		"415": {
+			"key": "Unsupported Media Type",
+			"message": "The server will not accept the request, because the media type is not supported"
+		},
+		"416": {
+			"key": "Requested Range Not Satisfiable",
+			"message": "The client has asked for a portion of the file, but the server cannot supply that portion"
+		},
+		"417": {
+			"key": "Expectation Failed",
+			"message": "The server cannot meet the requirements of the Expect request-header field"
+		},
+		"418": {
+			"key": "I'm a teapot",
+			"message": "Any attempt to brew coffee with a teapot should result in the error code \"418 I'm a teapot\". The resulting entity body MAY be short and stout"
+		},
+		"421": {
+			"key": "Misdirected Request",
+			"message": "The request was directed at a server that is not able to produce a response (for example because a connection reuse)"
+		},
+		"422": {
+			"key": "Unprocessable Entity",
+			"message": "The request was well-formed but was unable to be followed due to semantic errors"
+		},
+		"423": {
+			"key": "Locked",
+			"message": "The resource that is being accessed is locked"
+		},
+		"424": {
+			"key": "Failed Dependency",
+			"message": "The request failed due to failure of a previous request (e.g., a PROPPATCH)"
+		},
+		"426": {
+			"key": "Upgrade Required",
+			"message": "The client should switch to a different protocol such as TLS\/1.0, given in the Upgrade header field"
+		},
+		"428": {
+			"key": "Precondition Required",
+			"message": "The origin server requires the request to be conditional"
+		},
+		"429": {
+			"key": "Too Many Requests",
+			"message": "The user has sent too many requests in a given amount of time. Intended for use with rate limiting schemes"
+		},
+		"431": {
+			"key": "Request Header Fields Too Large",
+			"message": "The server is unwilling to process the request because either an individual header field, or all the header fields collectively, are too large"
+		},
+		"451": {
+			"key": "Unavailable For Legal Reasons",
+			"message": "A server operator has received a legal demand to deny access to a resource or to a set of resources that includes the requested resource"
+		},
+		"5xx": {
+			"key": "Server Error",
+			"message": ""
+		},
+		"500": {
+			"key": "Internal Server Error",
+			"message": "An error has occured in a server side script, a no more specific key is suitable"
+		},
+		"501": {
+			"key": "Not Implemented",
+			"message": "The server either does not recognize the request method, or it lacks the ability to fulfill the request"
+		},
+		"502": {
+			"key": "Bad Gateway",
+			"message": "The server was acting as a gateway or proxy and received an invalid response from the upstream server"
+		},
+		"503": {
+			"key": "Service Unavailable",
+			"message": "The server is currently unavailable (overloaded or down)"
+		},
+		"504": {
+			"key": "Gateway Timeout",
+			"message": "The server was acting as a gateway or proxy and did not receive a timely response from the upstream server"
+		},
+		"505": {
+			"key": "HTTP Version Not Supported",
+			"message": "The server does not support the HTTP protocol version used in the request"
+		},
+		"511": {
+			"key": "Network Authentication Required",
+			"message": "The client needs to authenticate to gain network access"
+		}
+	}
+}

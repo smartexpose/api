@@ -7,7 +7,9 @@ use ReflectionFunction;
 use Illuminate\Http\Response;
 use Dingo\Api\Contract\Debug\ExceptionHandler;
 use Dingo\Api\Contract\Debug\MessageBagErrors;
-use Illuminate\Validation\ValidationException;
+
+use Dingo\Api\Exception\Allmyhomes\AmhHttpException;
+
 use Symfony\Component\HttpFoundation\Response as BaseResponse;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Illuminate\Contracts\Debug\ExceptionHandler as IlluminateExceptionHandler;
@@ -50,6 +52,13 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
     protected $parentHandler;
 
     /**
+     * JSON doc containing all exceptions w/ messages & domains
+     *
+     * @var Array
+     */
+    protected $JSON;
+
+    /**
      * Create a new exception handler instance.
      *
      * @param \Illuminate\Contracts\Debug\ExceptionHandler $parentHandler
@@ -63,6 +72,10 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
         $this->parentHandler = $parentHandler;
         $this->format = $format;
         $this->debug = $debug;
+        $this->JSON = json_decode(
+            file_get_contents(__DIR__ . '/Allmyhomes/codes.json'),
+            true
+        );
     }
 
     /**
@@ -89,7 +102,15 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return $this->handle($exception);
+        $exception->url = $request->url();
+
+        if ($this->isCustomException($exception)) {
+            $data['error'] = $this->handle($exception);
+        } else {
+            return $this->handle($exception);
+        }
+
+        return $data;
     }
 
     /**
@@ -128,6 +149,22 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
      */
     public function handle(Exception $exception)
     {
+        if ($this->isCustomException($exception)) {
+            $errors = $exception->flattenException();
+
+            foreach ($errors as $err) {
+                $stack[] = array_merge($err, $this->fromJSON($err['status'], $err['code']));
+            }
+
+            return [
+                'status' => $exception->statusCode,
+                'url' => $exception->url,
+                'latest_line' => $exception->getLine(),
+                'errors' => $stack,
+            ];
+        }
+
+
         foreach ($this->handlers as $hint => $handler) {
             if (! $exception instanceof $hint) {
                 continue;
@@ -143,6 +180,36 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
         }
 
         return $this->genericResponse($exception);
+    }
+
+    /**
+     * Get the array corresponding to provided errorcode from JSON codes
+     *
+     * @param  int $statusCode HTTP statusCode
+     * @param  int $errorCode  errorCode
+     * @return array  default message / additional info
+     */
+    public function fromJSON(int $statusCode, int $errorCode)
+    {
+            // check if JSON has errorcode
+        return isset($this->JSON['codes'][$statusCode][$errorCode])
+            // true -> return array for errorcode
+            ? $this->JSON['codes'][$statusCode][$errorCode]
+            // placeholder msg for wrong errorcode
+            : ['message' => 'Non existent error_code provided in exception.'];
+    }
+
+    /**
+     * Check if exception is of type AmhHttpException
+     *
+     * @param  Exception $exception Exception to check
+     * @return bool               true/false
+     */
+    public function isCustomException(Exception $exception)
+    {
+        $class = 'Dingo\Api\Exception\Allmyhomes\AmhHttpException';
+
+        return ($exception instanceof $class);
     }
 
     /**
@@ -180,10 +247,6 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
      */
     protected function getStatusCode(Exception $exception)
     {
-        if ($exception instanceof ValidationException) {
-            return $exception->status;
-        }
-
         return $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500;
     }
 
@@ -221,11 +284,6 @@ class Handler implements ExceptionHandler, IlluminateExceptionHandler
 
         if ($exception instanceof MessageBagErrors && $exception->hasErrors()) {
             $replacements[':errors'] = $exception->getErrors();
-        }
-
-        if ($exception instanceof ValidationException) {
-            $replacements[':errors'] = $exception->errors();
-            $replacements[':status_code'] = $exception->status;
         }
 
         if ($code = $exception->getCode()) {
